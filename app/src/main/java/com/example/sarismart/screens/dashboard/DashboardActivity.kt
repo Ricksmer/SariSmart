@@ -12,17 +12,18 @@ import com.example.sarismart.screens.profile.ProfileActivity
 import com.example.sarismart.screens.inventory.InventoryActivity
 import com.example.sarismart.screens.addproduct.AddProductActivity
 import com.example.sarismart.R
-import com.example.sarismart.data.models.User
 
 class DashboardActivity : Activity() , DashboardContract.View {
 
     private lateinit var presenter:         DashboardPresenter
-    private          var currentUser:       User? = null
     private lateinit var tvUserName:        TextView
     private lateinit var btnProfile:        ImageView
     private lateinit var btnInventory:      ImageView
     private lateinit var btnAddProduct:     ImageView
     private lateinit var btnLogOut:         ImageView
+    private lateinit var tvTotalProducts: TextView
+    private lateinit var tvTotalCategories: TextView
+
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,9 +31,10 @@ class DashboardActivity : Activity() , DashboardContract.View {
         setContentView(R.layout.activity_dashboard)
 
         presenter = DashboardPresenter(this, DashboardModel())
-        currentUser = presenter.getCurrentUser()
 
         tvUserName = findViewById<TextView>(R.id.tvUserName)
+        tvTotalProducts = findViewById(R.id.tvTotalProducts)
+        tvTotalCategories = findViewById(R.id.tvTotalCategories)
 
         btnProfile = findViewById<ImageView>(R.id.btnProfile)
         btnInventory = findViewById<ImageView>(R.id.btnInventory)
@@ -40,8 +42,6 @@ class DashboardActivity : Activity() , DashboardContract.View {
         btnLogOut = findViewById<ImageView>(R.id.btnLogOut)
 
         // Display Username
-        val username = currentUser?.userName
-        tvUserName.setText("Hello, ${username}!")
 
         // Dashboard → Profile
         btnProfile.setOnClickListener {
@@ -61,6 +61,22 @@ class DashboardActivity : Activity() , DashboardContract.View {
         btnLogOut.setOnClickListener {
             presenter.onLogOutClicked()
         }
+
+        presenter.loadDashboard()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.loadDashboard()
+    }
+
+    override fun displayUserName(username: String) {
+        tvUserName.text = "Hello, $username!"
+    }
+
+    override fun displaySummary(totalProducts: Int, totalCategories: Int) {
+        tvTotalProducts.text = totalProducts.toString()
+        tvTotalCategories.text = totalCategories.toString()
     }
 
     override fun navigateToProfile() {
