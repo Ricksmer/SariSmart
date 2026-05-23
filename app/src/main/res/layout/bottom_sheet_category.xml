@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Category"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="#1A7949"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView android:id="@+id/catFood"                 style="@style/CategoryItem" android:text="Food"/>
+    <TextView android:id="@+id/catSnacks"               style="@style/CategoryItem" android:text="Snacks"/>
+    <TextView android:id="@+id/catInstantGoods"         style="@style/CategoryItem" android:text="Instant Goods"/>
+    <TextView android:id="@+id/catBeverage"             style="@style/CategoryItem" android:text="Beverage"/>
+    <TextView android:id="@+id/catPersonalCare"         style="@style/CategoryItem" android:text="Personal Care"/>
+    <TextView android:id="@+id/catCookingIngredients"   style="@style/CategoryItem" android:text="Cooking Ingredients"/>
+    <TextView android:id="@+id/catCleaningSupplies"     style="@style/CategoryItem" android:text="Cleaning and Laundry"/>
+    <TextView android:id="@+id/catHousehold"            style="@style/CategoryItem" android:text="Household"/>
+    <TextView android:id="@+id/catTobaccoAlcohol"       style="@style/CategoryItem" android:text="Tobacco and Alcohol"/>
+    <TextView android:id="@+id/catOther"                style="@style/CategoryItem" android:text="Other"/>
+
+</LinearLayout>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_header"
+        android:gravity="bottom"
+        android:paddingStart="36dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="12dp"
+        android:paddingEnd="36dp">
+
+        <ImageView
+            android:id="@+id/btnAppLogo"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/logoicon"
+            android:padding="4dp"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/btnSettings"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/icon_settings"
+            android:padding="4dp"/>
+    </LinearLayout>
+
+    <!-- Content Area -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Inventory"
+            android:textSize="22sp"
+            android:textColor="#1B7E3E"
+            android:layout_marginBottom="16dp"/>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView android:id="@+id/filterAll" style="@style/FilterChip" android:text="All"/>
+                <TextView android:id="@+id/filterFood" style="@style/FilterChip" android:text="Food"/>
+                <TextView android:id="@+id/filterSnacks" style="@style/FilterChip" android:text="Snacks"/>
+                <TextView android:id="@+id/filterInstantGoods" style="@style/FilterChip" android:text="Instant Goods"/>
+                <TextView android:id="@+id/filterBeverage" style="@style/FilterChip" android:text="Beverage"/>
+                <TextView android:id="@+id/filterPersonalCare" style="@style/FilterChip" android:text="Personal Care"/>
+                <TextView android:id="@+id/filterCookingIngredients" style="@style/FilterChip" android:text="Cooking Ingredients"/>
+                <TextView android:id="@+id/filterCleaningSupplies" style="@style/FilterChip" android:text="Cleaning nd Laundry"/>
+                <TextView android:id="@+id/filterHousehold" style="@style/FilterChip" android:text="Household"/>
+                <TextView android:id="@+id/filterTobaccoAlcohol" style="@style/FilterChip" android:text="Tobacco and Alcohol"/>
+                <TextView android:id="@+id/filterOther" style="@style/FilterChip" android:text="Other"/>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- ListView for Products -->
+        <ListView
+            android:id="@+id/lvProducts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="8dp"
+            android:scrollbars="none"
+            tools:listitem="@layout/item_product_list" />
+
+    </LinearLayout>
+
+    <!-- Footer / Navigation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_footer">
+
+        <ImageView
+            android:id="@+id/btnDashboard"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:src="@drawable/icon_dashboard"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <ImageView
+            android:id="@+id/btnProfile"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:src="@drawable/icon_profile"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <ImageView
+            android:id="@+id/btnAddProduct"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:src="@drawable/icon_add"
+            android:scaleType="centerInside"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/btnInventory"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_searchbar"
+                android:src="@drawable/icon_inventory_active" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btnLogOut"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:src="@drawable/icon_logout"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:focusable="true"/>
+    </LinearLayout>
+</LinearLayout>
