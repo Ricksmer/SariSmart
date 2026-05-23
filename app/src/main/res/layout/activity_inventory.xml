@@ -85,11 +85,45 @@
         <ListView
             android:id="@+id/lvProducts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:divider="@android:color/transparent"
             android:dividerHeight="8dp"
             android:scrollbars="none"
             tools:listitem="@layout/item_product_list" />
+
+        <LinearLayout
+            android:id="@+id/layoutEmptyState"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvEmptyTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="No products yet"
+                android:textColor="#1B7E3E"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tvEmptyMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="Add your first product to start tracking inventory."
+                android:textColor="#666666"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

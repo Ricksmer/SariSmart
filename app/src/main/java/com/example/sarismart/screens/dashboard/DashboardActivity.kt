@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.sarismart.screens.login.LoginActivity
 import com.example.sarismart.screens.profile.ProfileActivity
@@ -15,14 +14,15 @@ import com.example.sarismart.R
 
 class DashboardActivity : Activity() , DashboardContract.View {
 
-    private lateinit var presenter:         DashboardPresenter
-    private lateinit var tvUserName:        TextView
-    private lateinit var btnProfile:        ImageView
-    private lateinit var btnInventory:      ImageView
-    private lateinit var btnAddProduct:     ImageView
-    private lateinit var btnLogOut:         ImageView
-    private lateinit var tvTotalProducts: TextView
-    private lateinit var tvTotalCategories: TextView
+    private lateinit var presenter:             DashboardPresenter
+    private lateinit var tvUserName:            TextView
+    private lateinit var btnProfile:            ImageView
+    private lateinit var btnInventory:          ImageView
+    private lateinit var btnAddProduct:         ImageView
+    private lateinit var btnLogOut:             ImageView
+    private lateinit var layoutViewInventory:   LinearLayout
+    private lateinit var tvTotalProducts:       TextView
+    private lateinit var tvTotalCategories:     TextView
 
 
     @SuppressLint("MissingInflatedId")
@@ -40,6 +40,7 @@ class DashboardActivity : Activity() , DashboardContract.View {
         btnInventory = findViewById<ImageView>(R.id.btnInventory)
         btnAddProduct = findViewById<ImageView>(R.id.btnAddProduct)
         btnLogOut = findViewById<ImageView>(R.id.btnLogOut)
+        layoutViewInventory = findViewById(R.id.layoutViewInventory)
 
         // Display Username
 
@@ -50,6 +51,10 @@ class DashboardActivity : Activity() , DashboardContract.View {
 
         // Dashboard → Inventory
         btnInventory.setOnClickListener {
+            presenter.onInventoryClicked()
+        }
+
+        layoutViewInventory.setOnClickListener {
             presenter.onInventoryClicked()
         }
 

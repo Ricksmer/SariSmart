@@ -2,29 +2,36 @@ package com.example.sarismart.screens.inventory
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ListView
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.example.sarismart.R
 import com.example.sarismart.data.models.Product
 import com.example.sarismart.screens.addproduct.AddProductActivity
 import com.example.sarismart.screens.dashboard.DashboardActivity
+import com.example.sarismart.screens.editproduct.EditProductActivity
 import com.example.sarismart.screens.login.LoginActivity
 import com.example.sarismart.screens.profile.ProfileActivity
-import com.example.sarismart.screens.editproduct.EditProductActivity
-import android.graphics.Color
-import android.widget.TextView
 
 class InventoryActivity : Activity(), InventoryContract.View {
 
     private lateinit var presenter: InventoryPresenter
     private lateinit var lvProducts: ListView
+    private lateinit var layoutEmptyState: LinearLayout
+    private lateinit var tvEmptyTitle: TextView
+    private lateinit var tvEmptyMessage: TextView
     private lateinit var btnDashboard: ImageView
     private lateinit var btnProfile: ImageView
     private lateinit var btnAddProduct: ImageView
     private lateinit var btnLogOut: ImageView
     private lateinit var categoryButtons: Map<String, TextView>
+    private var selectedCategory = "All"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +39,14 @@ class InventoryActivity : Activity(), InventoryContract.View {
 
         presenter = InventoryPresenter(this, InventoryModel())
 
-        lvProducts    = findViewById(R.id.lvProducts)
-        btnDashboard  = findViewById(R.id.btnDashboard)
-        btnProfile    = findViewById(R.id.btnProfile)
-        btnAddProduct = findViewById(R.id.btnAddProduct)
-        btnLogOut     = findViewById(R.id.btnLogOut)
+        lvProducts          = findViewById(R.id.lvProducts)
+        layoutEmptyState    = findViewById(R.id.layoutEmptyState)
+        tvEmptyTitle        = findViewById(R.id.tvEmptyTitle)
+        tvEmptyMessage      = findViewById(R.id.tvEmptyMessage)
+        btnDashboard        = findViewById(R.id.btnDashboard)
+        btnProfile          = findViewById(R.id.btnProfile)
+        btnAddProduct       = findViewById(R.id.btnAddProduct)
+        btnLogOut           = findViewById(R.id.btnLogOut)
 
         btnDashboard.setOnClickListener  { presenter.onDashboardClicked() }
         btnProfile.setOnClickListener    { presenter.onProfileClicked() }
@@ -53,6 +63,13 @@ class InventoryActivity : Activity(), InventoryContract.View {
     }
 
     override fun displayProducts(products: List<Product>) {
+        if (products.isEmpty()) {
+            showEmptyState()
+        } else {
+            lvProducts.visibility = View.VISIBLE
+            layoutEmptyState.visibility = View.GONE
+        }
+
         val adapter = ProductAdapter(
             context   = this,
             products  = products,
@@ -65,7 +82,7 @@ class InventoryActivity : Activity(), InventoryContract.View {
     override fun confirmDelete(product: Product) {
         AlertDialog.Builder(this)
             .setTitle("Delete Product")
-            .setMessage("Delete \"${product.name}\"? This cannot be undone.")
+            .setMessage("Are you sure you want to delete \"${product.name}\"? This action cannot be undone.")
             .setPositiveButton("Delete") { _, _ ->
                 presenter.deleteProduct(product)
             }
@@ -74,6 +91,8 @@ class InventoryActivity : Activity(), InventoryContract.View {
     }
 
     override fun displaySelectedCategory(category: String) {
+        selectedCategory = category
+
         categoryButtons.forEach { (buttonCategory, button) ->
             if (buttonCategory == category) {
                 button.setBackgroundResource(R.drawable.bg_filter_chip_selected)
@@ -84,6 +103,19 @@ class InventoryActivity : Activity(), InventoryContract.View {
             }
         }
     }
+    private fun showEmptyState() {
+        lvProducts.visibility = View.GONE
+        layoutEmptyState.visibility = View.VISIBLE
+
+        if (selectedCategory == "All") {
+            tvEmptyTitle.text = "No products yet"
+            tvEmptyMessage.text = "Add your first product to start tracking inventory."
+        } else {
+            tvEmptyTitle.text = "No products in $selectedCategory"
+            tvEmptyMessage.text = "Try another category or add a product under this category."
+        }
+    }
+
     private fun setupCategoryFilters() {
         categoryButtons = mapOf(
             "All" to findViewById(R.id.filterAll),

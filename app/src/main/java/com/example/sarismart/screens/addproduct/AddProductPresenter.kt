@@ -23,8 +23,8 @@ class AddProductPresenter(
             return
         }
         val parsedPrice = price.toDoubleOrNull()
-        if (parsedPrice == null || parsedPrice < 0) {
-            view.showError("price", "Enter a valid price.")
+        if (parsedPrice == null || parsedPrice <= 0.0) {
+            view.showError("price", "Enter a price greater than 0.")
             return
         }
         if (quantity.isBlank()) {
@@ -33,7 +33,7 @@ class AddProductPresenter(
         }
         val parsedQuantity = quantity.toIntOrNull()
         if (parsedQuantity == null || parsedQuantity < 0) {
-            view.showError("quantity", "Enter a valid quantity.")
+            view.showError("quantity", "Enter a quantity of 0 or more.")
             return
         }
         if (category.isBlank()) {

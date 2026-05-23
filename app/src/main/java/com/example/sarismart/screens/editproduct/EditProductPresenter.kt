@@ -34,22 +34,22 @@ class EditProductPresenter(
         var hasError = false
 
         if (cleanName.isEmpty()) {
-            view.showError("name", "Product name is required")
+            view.showError("name", "Product name is required.")
             hasError = true
         }
 
         if (parsedPrice == null || parsedPrice <= 0.0) {
-            view.showError("price", "Enter a valid price")
+            view.showError("price", "Enter a price greater than 0.")
             hasError = true
         }
 
         if (parsedQuantity == null || parsedQuantity < 0) {
-            view.showError("quantity", "Enter a valid quantity")
+            view.showError("quantity", "Enter a quantity of 0 or more.")
             hasError = true
         }
 
         if (cleanCategory.isEmpty()) {
-            view.showError("category", "Category is required")
+            view.showError("category", "Please select a category.")
             hasError = true
         }
 
